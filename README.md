@@ -14,3 +14,8 @@ Move **BBCR_Return_Null_Mod.dll** to **%GameFolder%\BepInEx\plugins**
 
 ## All done!
 Enjoy!
+
+# To Do:
+
+ - Eliminate all checks outside of the main menu (you can still see the glitch on the You Can Think Pad and the endings (secret ones included) are different)
+**If you have a suggestion, open an issue!**
