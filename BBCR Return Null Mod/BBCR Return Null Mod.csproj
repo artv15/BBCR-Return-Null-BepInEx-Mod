@@ -49,8 +49,4 @@
       <HintPath>Dependeicies\Unity.TextMeshPro.dll</HintPath>
     </Reference>
   </ItemGroup>
-  
-  <Target Name="PostBuild" AfterTargets="PostBuildEvent">
-    <Exec Command="copy &quot;C:\Users\artv1\source\repos\BBCR Return Null Mod\BBCR Return Null Mod\bin\Debug\net481\BBCR_Return_Null_Mod.dll&quot; &quot;D:\SteamLibrary\steamapps\common\Baldi's Basics Classic Remastered\BepInEx\plugins&quot;" />
-  </Target>
 </Project>
