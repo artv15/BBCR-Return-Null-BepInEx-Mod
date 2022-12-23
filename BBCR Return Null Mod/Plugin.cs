@@ -3,6 +3,8 @@ using BepInEx.Logging;
 using HarmonyLib;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
+using TMPro;
+using UnityEngine;
 
 namespace BBCR_Return_Null_Mod
 {
@@ -20,17 +22,26 @@ namespace BBCR_Return_Null_Mod
         }
     }
 
+
     internal class MainMenuPatcher
     {
         [HarmonyPrefix]
         [HarmonyPatch(typeof(MainMenu), "Start")]
-        internal static void Start()
+        internal static void Start(MainMenu __instance)
         {
-            var lgr = new ManualLogSource("MenuPatch");
-            lgr.LogMessage("Tried to update teh values!");
-            Singleton<PlayerFileManager>.Instance.flags[4] = false;
-            Singleton<PlayerFileManager>.Instance.flags[5] = false;
-            Singleton<PlayerFileManager>.Instance.flags[0] = true;
+            if (PlayerPrefs.GetInt("hasNullInstalledAnnounced") != 1) 
+            { 
+                Traverse menuTraverse = Traverse.Create(__instance); // i hate private fields. all my homies hate private fields.
+                AudioManager audMan = menuTraverse.Field("audMan").GetValue<AudioManager>();
+                TMP_Text unlockText = menuTraverse.Field("unlockTmp").GetValue<TMP_Text>();
+                menuTraverse.Field("unlockNotif").SetValue(true);
+                menuTraverse.Field("startDelay").SetValue(10f);
+
+                __instance.unlockScreen.SetActive(true);
+                unlockText.text = "Return null mod has been succesfully installed! Good job!";
+                audMan.PlaySingle(__instance.audWow);
+                PlayerPrefs.SetInt("hasNullInstalledAnnounced", 1);
+            }
         }
     }
 
