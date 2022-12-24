@@ -13,10 +13,7 @@ namespace Mod_Installer
         {
             InitializeComponent();
 
-            if (IsAdministrator())
-            {
-                MessageBox.Show("Installer is launched with admin permissions. Select the folder again and click install button.", "Admin rights given.", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            }
+            MessageBox.Show("Make sure that you downloaded the installer from repository, featured in the steam guide. If you did not, close this installer right now, or you risk installing malware and other nasty things onto your device!", "Hey!", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
 
             outputTextBox.ReadOnly = true;
         }
@@ -181,7 +178,7 @@ namespace Mod_Installer
             return;
         }
 
-        private void installButton_Click(object sender, EventArgs e)
+        private async void installButton_Click(object sender, EventArgs e)
         {
             if (!validFolderCheck.Checked)
             {
@@ -244,8 +241,10 @@ namespace Mod_Installer
                     AddLog("[ModInstaller] Downloading latest mod release.");
                     using (var client = new WebClient())
                     {
-
-                        client.DownloadFile($"{GetFinalRedirect("https://github.com/artv15/BBCR-Return-Null-BepInEx-Mod/releases/latest")}/mod.dll", "mod.dll");
+                        string downloadUri = GetFinalRedirect("https://github.com/artv15/BBCR-Return-Null-BepInEx-Mod/releases/latest") + "/mod.dll";
+                        downloadUri = downloadUri.Replace("tag", "download");
+                        AddLog($"[ModInstaller] Downloading it from: {downloadUri}");
+                        client.DownloadFile(downloadUri, "./mod.dll");
                     }
                     AddLog("[ModInstaller] Downloaded.");
                     AddLog($"[ModInstaller] Copying mod inside {gameFolderTextBox.Text + "\\BepInEx\\plugins"} directory...");
