@@ -134,7 +134,7 @@ namespace Mod_Installer
                 bepInExInstalledCheck.Checked = false;
                 gameLaunchedOnceCheck.Checked = false;
                 modHasBeenInstalledCheck.Checked = false;
-                MessageBox.Show("No gamefolder path specified!", "Oh-oh! Spaghettio!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("This is not a valid BBCR folder! It should contain \"BALDI.exe\"!", "Oh-oh! Spaghettio!", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
             else
@@ -147,7 +147,7 @@ namespace Mod_Installer
                 bepInExInstalledCheck.Checked = false;
                 gameLaunchedOnceCheck.Checked = false;
                 modHasBeenInstalledCheck.Checked = false;
-                MessageBox.Show("BepInEx is not installed. Click the Begin Installation Procedure to install it!", "Oh-oh! Spaghettio!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("BepInEx is not installed. Click the Begin Installation Procedure to install it!", "Oh-oh! Spaghettio!", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
             else
@@ -159,7 +159,7 @@ namespace Mod_Installer
             {
                 gameLaunchedOnceCheck.Checked = false;
                 modHasBeenInstalledCheck.Checked = false;
-                MessageBox.Show("Launch the game once to generate all required folders!", "Oh-oh! Spaghettio!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Launch the game once to generate all required folders!", "Oh-oh! Spaghettio!", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
             else
@@ -170,7 +170,7 @@ namespace Mod_Installer
             if (!File.Exists(gameFolderTextBox.Text + "\\BepInEx\\plugins\\Return_Null_Mod.dll"))
             {
                 modHasBeenInstalledCheck.Checked = false;
-                MessageBox.Show("Mod is not installed! Click the Begin Installation Procedure to install it!", "Oh-oh! Spaghettio!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Mod is not installed! Click the Begin Installation Procedure to install it!", "Oh-oh! Spaghettio!", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
             modHasBeenInstalledCheck.Checked = true;
@@ -228,7 +228,7 @@ namespace Mod_Installer
                 }
             }
 
-            if (!gameLaunchedOnceCheck.Checked)
+            if (!gameLaunchedOnceCheck.Checked && !bypassPluginFolderCheck.Checked)
             {
                 MessageBox.Show("Launch the game once to continue! If you have done that already, recheck the game folder!", "Installation", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
@@ -238,10 +238,15 @@ namespace Mod_Installer
             {
                 try
                 {
+                    if (bypassPluginFolderCheck.Checked && Directory.Exists(gameFolderTextBox.Text + "\\BepInEx\\plugins"))
+                    {
+                        AddLog("[ModInstaller] Creating plugins directory manually (bypassed).");
+                        Directory.CreateDirectory(gameFolderTextBox.Text + "\\BepInEx\\plugins");
+                    }
                     AddLog("[ModInstaller] Downloading latest mod release.");
                     using (var client = new WebClient())
                     {
-                        string downloadUri = GetFinalRedirect("https://github.com/artv15/BBCR-Return-Null-BepInEx-Mod/releases/latest") + "/mod.dll";
+                        string downloadUri = GetFinalRedirect("https://github.com/artv15/BBCR-Return-Null-BepInEx-Mod/releases/latest") + "/mod.dll"; //getting latest version
                         downloadUri = downloadUri.Replace("tag", "download");
                         AddLog($"[ModInstaller] Downloading it from: {downloadUri}");
                         client.DownloadFile(downloadUri, "./mod.dll");
@@ -259,12 +264,34 @@ namespace Mod_Installer
                     AddLog($"[ERROR] Installation failed! Error: {ex.Message}. Open an issue on the mod's github page for assistance!");
                 }
             }
+
+            AddLog($"[INFO] Installation has been already completed! If you want to reinstall the mod, delete in manually inside %gamefolder%/BepInEx/plugins");
         }
 
         private void outputTextBox_TextChanged(object sender, EventArgs e)
         {
             outputTextBox.SelectionStart = outputTextBox.Text.Length;
             outputTextBox.ScrollToCaret();
+        }
+
+        private void checkBox1_CheckedChanged(object sender, EventArgs e)
+        {
+            if (bypassPluginFolderCheck.Checked)
+            {
+                var res = MessageBox.Show("Use this if you want to skip launching the game after installing BepInEx. However, if BepInEx was installed incorrectly, this will be a huge issue. Click OK to continue.", "For your information", MessageBoxButtons.OKCancel, MessageBoxIcon.Information);
+                if (res == DialogResult.OK)
+                {
+                    gameLaunchedOnceCheck.Text = "All folders have been generated [BYPASSED]";
+                    gameLaunchedOnceCheck.Checked = true;
+                    AddLog("[WARNING] Bypassed plugin folder check. Upon mod installation folder will be created anyway (if not present)");
+                } 
+            }
+            else
+            {
+                gameLaunchedOnceCheck.Text = "All folders have been generated";
+                MessageBox.Show("We need to recheck your game folder, for literally no reason", "Hey!", MessageBoxButtons.OK, MessageBoxIcon.Information, MessageBoxDefaultButton.Button1, 0);
+                GameFolderCheck_Click(null, null);
+            }
         }
     }
 }

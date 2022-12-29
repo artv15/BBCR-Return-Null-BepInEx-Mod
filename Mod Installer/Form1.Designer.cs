@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.bypassPluginFolderCheck = new System.Windows.Forms.CheckBox();
             this.GameFolderCheck = new System.Windows.Forms.Button();
             this.gamefolderOpenButton = new System.Windows.Forms.Button();
             this.gameFolderTextBox = new System.Windows.Forms.TextBox();
@@ -48,6 +49,7 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.bypassPluginFolderCheck);
             this.groupBox1.Controls.Add(this.GameFolderCheck);
             this.groupBox1.Controls.Add(this.gamefolderOpenButton);
             this.groupBox1.Controls.Add(this.gameFolderTextBox);
@@ -58,6 +60,17 @@
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Game folder selection";
+            // 
+            // bypassPluginFolderCheck
+            // 
+            this.bypassPluginFolderCheck.AutoSize = true;
+            this.bypassPluginFolderCheck.Location = new System.Drawing.Point(87, 66);
+            this.bypassPluginFolderCheck.Name = "bypassPluginFolderCheck";
+            this.bypassPluginFolderCheck.Size = new System.Drawing.Size(181, 19);
+            this.bypassPluginFolderCheck.TabIndex = 4;
+            this.bypassPluginFolderCheck.Text = "Ignore plugin folder presence";
+            this.bypassPluginFolderCheck.UseVisualStyleBackColor = true;
+            this.bypassPluginFolderCheck.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
             // 
             // GameFolderCheck
             // 
@@ -218,5 +231,6 @@
         private CheckBox validFolderCheck;
         private CheckBox gameLaunchedOnceCheck;
         private Button installButton;
+        private CheckBox bypassPluginFolderCheck;
     }
 }
