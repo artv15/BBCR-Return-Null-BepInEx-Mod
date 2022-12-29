@@ -5,13 +5,12 @@ name: .NET
 
 on:
   push:
-    branches: [ "main" ]
+    branches: [ "main", "development" ]
   pull_request:
-    branches: [ "main" ]
+    branches: [ "main", "development" ]
 
 jobs:
   build:
-
     runs-on: windows-latest
 
     steps:
@@ -24,6 +23,8 @@ jobs:
       run: dotnet restore
     - name: Build
       run: dotnet build --no-restore
+    - name: Zip installer build
+      run: cd "D:\\a\\" && tar.exe -a -c -f installer.zip "D:\\a\\BBCR-Return-Null-BepInEx-Mod\\BBCR-Return-Null-BepInEx-Mod\\Mod Installer\\bin\\Debug\\net6.0-windows"
     - name: Create Release
       id: create_release
       uses: actions/create-release@v1
@@ -34,8 +35,8 @@ jobs:
         release_name: Release ${{ github.ref }}
         draft: true
         prerelease: false
-    - name: Upload Release Asset
-      id: upload-release-asset 
+    - name: Upload Mod to release
+      id: upload-mod-asset 
       uses: actions/upload-release-asset@v1
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -44,3 +45,14 @@ jobs:
         asset_path: "D:\\a\\BBCR-Return-Null-BepInEx-Mod\\BBCR-Return-Null-BepInEx-Mod\\BBCR Return Null Mod\\bin\\Debug\\net481\\BBCR_Return_Null_Mod.dll"
         asset_name: "mod.dll"
         asset_content_type: application/octet-stream
+    - name: Upload Installer to release
+      id: upload-installer-asset 
+      uses: actions/upload-release-asset@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        upload_url: ${{ steps.create_release.outputs.upload_url }} # This pulls from the CREATE RELEASE step above, referencing it's ID to get its outputs object, which include a `upload_url`. See this blog post for more info: https://jasonet.co/posts/new-features-of-github-actions/#passing-data-to-future-steps 
+        asset_path: "D:\\a\\installer.zip"
+        asset_name: "installer.zip"
+        asset_content_type: application/zip
+        
