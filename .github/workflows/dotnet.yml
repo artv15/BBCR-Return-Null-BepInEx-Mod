@@ -5,9 +5,9 @@ name: .NET
 
 on:
   push:
-    branches: [ "main", "development" ]
+    branches: [ "main" ]
   pull_request:
-    branches: [ "main", "development" ]
+    branches: [ "main" ]
 
 jobs:
   build:
@@ -24,7 +24,7 @@ jobs:
     - name: Build
       run: dotnet build --no-restore
     - name: Zip installer build
-      run: cd "D:\\a\\" && tar.exe -a -c -f installer.zip "D:\\a\\BBCR-Return-Null-BepInEx-Mod\\BBCR-Return-Null-BepInEx-Mod\\Mod Installer\\bin\\Debug\\net6.0-windows"
+      run: cd "D:\\a\\" && xcopy "D:\\a\\BBCR-Return-Null-BepInEx-Mod\\BBCR-Return-Null-BepInEx-Mod\\Mod Installer\\bin\\Debug\\net6.0-windows" "D:\\a\\InstallerBuild" && tar.exe -a -c -f installer.zip "InstallerBuild"
     - name: Create Release
       id: create_release
       uses: actions/create-release@v1
