@@ -284,7 +284,11 @@ namespace Mod_Installer
                     gameLaunchedOnceCheck.Text = "All folders have been generated [BYPASSED]";
                     gameLaunchedOnceCheck.Checked = true;
                     AddLog("[WARNING] Bypassed plugin folder check. Upon mod installation folder will be created anyway (if not present)");
-                } 
+                }
+                else
+                {
+                    bypassPluginFolderCheck.Checked = false;
+                }
             }
             else
             {
