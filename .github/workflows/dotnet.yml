@@ -24,7 +24,7 @@ jobs:
     - name: Build
       run: dotnet build --no-restore
     - name: Zip installer build
-      run: cd "D:\\a\\" && dcopy "D:\\a\\BBCR-Return-Null-BepInEx-Mod\\BBCR-Return-Null-BepInEx-Mod\\Mod Installer\\bin\\Debug\\net6.0-windows" "D:\\a\\InstallerBuild\\" && tar.exe -a -c -f installer.zip "InstallerBuild"
+      run: cd "D:\\a\\" && xcopy "D:\\a\\BBCR-Return-Null-BepInEx-Mod\\BBCR-Return-Null-BepInEx-Mod\\Mod Installer\\bin\\Debug\\net6.0-windows" "D:\\a\\InstallerBuild\\" && tar.exe -a -c -f installer.zip "InstallerBuild"
     - name: Create Release
       id: create_release
       uses: actions/create-release@v1
