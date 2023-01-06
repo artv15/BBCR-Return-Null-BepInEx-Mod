@@ -1,6 +1,6 @@
 ﻿namespace Mod_Installer
 {
-    partial class Form1
+    partial class InstallerLegacy
     {
         /// <summary>
         ///  Required designer variable.
@@ -196,7 +196,7 @@
             this.validFolderCheck.Text = "Game folder valid";
             this.validFolderCheck.UseVisualStyleBackColor = true;
             // 
-            // Form1
+            // InstallerLegacy
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -205,8 +205,8 @@
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
-            this.Name = "Form1";
-            this.Text = "Return Null Mod Installer";
+            this.Name = "InstallerLegacy";
+            this.Text = "Return null Mod Installer [LEGACY]";
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.groupBox2.ResumeLayout(false);

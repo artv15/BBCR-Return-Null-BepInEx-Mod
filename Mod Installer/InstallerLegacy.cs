@@ -5,15 +5,15 @@ using System.Security.Principal;
 
 namespace Mod_Installer
 {
-    public partial class Form1 : Form
+    public partial class InstallerLegacy : Form
     {
         private FolderBrowserDialog openFileDialog = new FolderBrowserDialog();
 
-        public Form1()
+        public InstallerLegacy()
         {
             InitializeComponent();
 
-            MessageBox.Show("Make sure that you downloaded the installer from repository, featured in the steam guide. If you did not, close this installer right now, or you risk installing malware and other nasty things onto your device!", "Hey!", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+            Console.WriteLine("[INSTALLER LEGACY] Ready!");
 
             outputTextBox.ReadOnly = true;
         }
@@ -82,30 +82,6 @@ namespace Mod_Installer
             } while (maxRedirCount-- > 0);
 
             return newUrl;
-        }
-
-        public static bool IsAdministrator()
-        {
-            var identity = WindowsIdentity.GetCurrent();
-            var principal = new WindowsPrincipal(identity);
-            return principal.IsInRole(WindowsBuiltInRole.Administrator);
-        }
-
-        public static void StartAsAdmin(string fileName)
-        {
-            fileName = fileName.Replace(".dll", ".exe");
-            var proc = new Process
-            {
-                StartInfo =
-                {
-                    FileName = fileName,
-                    UseShellExecute = true,
-                    Verb = "runas"
-                }
-            };
-
-            proc.Start();
-            Application.Exit();
         }
 
         private void gamefolderOpenButton_Click(object sender, EventArgs e)
