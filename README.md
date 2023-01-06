@@ -16,7 +16,7 @@ Move **BBCR_Return_Null_Mod.dll** to **%GameFolder%\BepInEx\plugins**
 Enjoy!
 
 # To Do:
- - Create an installer (windows is probably going to think that it is a virus)
- - Display a successful mod installation (maybe some text in the main menu that mod has been successfully installed)
+ - ~~Create an installer (windows is probably going to think that it is a virus)~~
+ - ~~Display a successful mod installation (maybe some text in the main menu that mod has been successfully installed)~~
  - ~~Eliminate all checks outside of the main menu (you can still see the glitch on the You Can Think Pad and the endings (secret ones included) are different)~~\
 **If you have a suggestion, open an issue!**
