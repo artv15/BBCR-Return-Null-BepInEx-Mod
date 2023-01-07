@@ -93,6 +93,8 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(434, 266);
             this.Controls.Add(this.bepInExInstalllabel);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.MaximizeBox = false;
             this.Name = "InstallerRefined_st2";
             this.Text = "Return null Mod Installer [NEW]";
             this.bepInExInstalllabel.ResumeLayout(false);

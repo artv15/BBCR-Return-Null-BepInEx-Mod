@@ -91,6 +91,8 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(414, 262);
             this.Controls.Add(this.installModGroupBox);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.MaximizeBox = false;
             this.Name = "InstallerRefined_st3";
             this.Text = "Return null Mod Installer [NEW]";
             this.installModGroupBox.ResumeLayout(false);

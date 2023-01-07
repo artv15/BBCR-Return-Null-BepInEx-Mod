@@ -106,6 +106,8 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(513, 242);
             this.Controls.Add(this.stage1GroupBox);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.MaximizeBox = false;
             this.Name = "InstallerRefined";
             this.Text = "Return null Mod Installer [NEW]";
             this.stage1GroupBox.ResumeLayout(false);
