@@ -85,5 +85,10 @@ namespace Mod_Installer
                 Console.ResetColor();
             }
         }
+
+        private void checkBox1_CheckedChanged(object sender, EventArgs e)
+        {
+            startLegacyButton.Enabled = legacyEnableOverride.Checked;
+        }
     }
 }

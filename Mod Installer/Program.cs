@@ -29,10 +29,11 @@ namespace Mod_Installer
         static void Main()
         {
             AllocConsole();
+            Version version = new Version(0,1,0,0);
 
             Console.WriteLine("[BOOT] Installer is starting up...");
             Console.WriteLine("[BOOT] Installer and the mod are created by Treeshold (artv15).");
-            Console.WriteLine($"[BOOT] Installer version: {Application.ProductVersion}.");
+            Console.WriteLine($"[BOOT] Installer version: {version}.");
 
             Console.WriteLine("[BOOT] Starting up the picker...");
             // To customize application configuration such as set high DPI settings or default font,

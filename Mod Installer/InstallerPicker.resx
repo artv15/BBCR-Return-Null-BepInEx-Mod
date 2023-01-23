@@ -57,15 +57,4 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="label2.Text" xml:space="preserve">
-    <value>  - Remade the installer, now it should be more 
- user-friendly. It's still in beta, so you can still use 
- the old one.
- - Now downloads may be lomger, reason 
- is still unknown. New installer handles the issue
- better than the old one
- - Mod was not changed since 0.0.2.0 (i think),
- just the installer.
- - oh, i added release notes too? this is epic!</value>
-  </data>
 </root>
